@@ -1,0 +1,138 @@
+############################
+# Smart man (Manual) HACKs #
+############################
+
+#man ()	# Quick HACK for beginners using manual pages (some extra work needed)
+#{
+#	if [ $# -eq 0 ];	# Check if we have Zero arguments
+#	then
+#		# !!
+#		#command man `history | tail -n2 | head -n1 | cut -d'@' -f2`; # history (command) logged
+#		command man `history | tail -n1 | cut -d'@' -f2`;	# history (command) ignored
+#	else
+#		which $1;
+#
+#		if [ $? -eq 0 ]
+#		then
+#			command man $1;
+#		fi
+#	fi
+#}
+
+
+
+#################################################
+# Compute Hash [Message Digest] (using OpenSSL) #
+#################################################
+
+md4 ()
+{
+    if [ $# -eq 0 ]; then	# Check for the number of passed arugments
+      echo -e "Usage:\tmd4 input_file"	# Print function usage message
+      return 1				# Return error code (failing to meet initial requirements)
+    fi
+
+
+    local BACKUP_IFS=$IFS;	# Preserve current IFS (Internal Field Seperator)
+    IFS=$'\t\n';			# Set IFS (Internal Field Seperator) to interpret Tabs and Newlines
+
+    openssl dgst -md4 $@;	# Pass function arguments to OpenSSL
+
+    IFS=$BACKUP_IFS;		# Restore previous IFS (Internal Field Seperator)
+}
+
+md5 ()
+{
+    if [ $# -eq 0 ]; then
+      echo -e "Usage:\tmd5 input_file"
+      return 1
+    fi
+
+
+    local BACKUP_IFS=$IFS;
+    IFS=$'\t\n';
+
+    openssl dgst -md5 $@;
+
+    IFS=$BACKUP_IFS;
+}
+
+sha1 ()
+{
+    if [ $# -eq 0 ]; then
+      echo -e "Usage:\tsha1 input_file"
+      return 1
+    fi
+
+
+    local BACKUP_IFS=$IFS;
+    IFS=$'\t\n';
+
+    openssl dgst -sha1 $@;
+
+    IFS=$BACKUP_IFS;
+}
+
+sha224 ()
+{
+    if [ $# -eq 0 ]; then
+      echo -e "Usage:\tsha224 input_file"
+      return 1
+    fi
+
+
+    local BACKUP_IFS=$IFS;
+    IFS=$'\t\n';
+
+    openssl dgst -sha224 $@;
+
+    IFS=$BACKUP_IFS;
+}
+
+sha256 ()
+{
+    if [ $# -eq 0 ]; then
+      echo -e "Usage:\tsha256 input_file"
+      return 1
+    fi
+
+
+    local BACKUP_IFS=$IFS;
+    IFS=$'\t\n';
+
+    openssl dgst -sha256 $@;
+
+    IFS=$BACKUP_IFS;
+}
+
+sha384 ()
+{
+    if [ $# -eq 0 ]; then
+      echo -e "Usage:\tsha384 input_file"
+      return 1
+    fi
+
+
+    local BACKUP_IFS=$IFS;
+    IFS=$'\t\n';
+
+    openssl dgst -sha384 $@;
+
+    IFS=$BACKUP_IFS;
+}
+
+sha512 ()
+{
+    if [ $# -eq 0 ]; then
+      echo -e "Usage:\tsha512 input_file"
+      return 1
+    fi
+
+
+    local BACKUP_IFS=$IFS;
+    IFS=$'\t\n';
+
+    openssl dgst -sha512 $@;
+
+    IFS=$BACKUP_IFS;
+}

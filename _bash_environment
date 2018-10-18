@@ -1,0 +1,79 @@
+####################################################
+# Bash Environment Variables (shell configuration) #
+####################################################
+
+# Language Defaults (US/EN and UTF-8)
+#export LANG='en_US.UTF-8';
+#export LC_ALL='en_US.UTF-8';
+
+# History line format
+# man 3 strftime
+#	%Y	is replaced by the year with century as a decimal number
+#	%m	is replaced by the month as a decimal number (01-12)
+#	%d	is replaced by the day of the month as a decimal number (01-31)
+#	%T	is equivalent to ``%H:%M:%S''
+export HISTTIMEFORMAT='%Y/%m/%d %T @ '
+
+# Do not record the following commands to history
+export HISTIGNORE="history:help:clear:bg:fg:man:echo:exit"
+
+# Set the number of commands which will be saved to history
+export HISTSIZE=100000
+export HISTFILESIZE=$HISTSIZE
+
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+
+# set Bash Prompt Line based on *nix variant
+case `uname -s` in
+	Darwin)	# macOS (previously was known as macOS X)
+		PS1=$'\[\033[1m\]\A\[\033[0m\] '		# Time entry (helps tracking command execution)
+		PS1+=$'\D{%a %e %b} '					# Day of the Week / Day / Month
+		PS1+=$'<$?> '							# Shows exit code of previous command
+		# (next line) print the battery's remaining charge percentage on macOS
+		PS1+=$'(\[\033[2m\]`pmset -g batt | grep % | cut -f2 | cut -d";" -f1`\[\033[0m\]) '
+		PS1+=$'[\[\033[4m\]\u@\h\[\033[0m\]] '	# Current logged in as user @ hostname (machine)
+		PS1+=$'\w '								# Path for current working directory
+		PS1+=$'\$ '								# Commands are being executed as User / Root
+		export PS1
+		;;
+esac
+
+
+export EDITOR='vim'
+
+
+#########################################################################################
+# CLI applications (which read their configuration directly from the shell environment) #
+#########################################################################################
+
+#######
+# LESS
+#######
+#	M	print line numbers
+#	Q	supress bell audible sound
+#	x4	set tab width to represent 4 white spaces
+export LESS='-MQx4'
+
+#####
+# MAN
+#####
+# Do not clear screen after exiting manual page
+export MANPAGER='less -X'
+
+######################
+# HOMEBREW (Hardening)
+######################
+
+# Disable anonymous statistics collection
+export HOMEBREW_NO_ANALYTICS=1
+
+# Disable automatic updates
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# Avoid leaking GitHu username
+export HOMEBREW_NO_GITHUB_API=1
+
+# Do no accept protocol downgrades (HTTPs to HTTP)
+export HOMEBREW_NO_INSECURE_REDIRECT=1

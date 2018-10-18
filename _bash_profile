@@ -1,0 +1,23 @@
+#if [ $- != *i* ]
+#	# shell is non-interactive. be done...
+#	return
+#fi
+
+case $- in
+	*i*) # shell is interative
+	  ;;
+	*) # shell is non-interactive
+	  return
+	  ;;
+esac
+
+#umask 0333	# set default file permissions to read only
+
+#################################
+# Load bash configuration files #
+#################################
+
+for file in ~/.{bash_config,bash_environment,bash_aliases,bash_functions}; do
+	[ -r "$file" ] && source "$file"
+done
+unset file
